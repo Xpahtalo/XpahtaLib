@@ -1,16 +1,16 @@
 ﻿using Dalamud.Interface.Utility.Raii;
-using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 namespace XpahtaLib.UserInterface.Tabs;
 
 public class TabBar : IDisposable
 {
+    public required string Name { get; set; }
     // ReSharper disable once CollectionNeverUpdated.Global
     public required List<TabBase> Tabs { get; set; }
 
     public void Draw()
     {
-        using var tabBar = ImRaii.TabBar("Main Window Tab Bar");
+        using var tabBar = ImRaii.TabBar(Name);
         if (!tabBar)
             return;
         for (var i = 0; i < Tabs.Count; i++) {

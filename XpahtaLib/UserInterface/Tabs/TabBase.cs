@@ -6,7 +6,7 @@ namespace XpahtaLib.UserInterface.Tabs;
 public abstract class TabBase : IDisposable
 {
     public abstract string Name { get; }
-    
+
     public virtual void Draw()
     {
         using var tab = ImRaii.TabItem(Name);
@@ -15,7 +15,7 @@ public abstract class TabBase : IDisposable
         DrawTab();
     }
 
-    protected virtual void DrawTab() { ImGui.Text("Not implemented yet."); }
+    protected abstract void DrawTab();
 
     protected virtual void Dispose(bool disposing)
     {
