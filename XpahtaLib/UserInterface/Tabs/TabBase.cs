@@ -17,6 +17,10 @@ public abstract class TabBase : IDisposable
 
     protected abstract void DrawTab();
 
+    public virtual void OnOpen() { }
+    
+    public virtual void OnClose() { }
+
     protected virtual void Dispose(bool disposing)
     {
         if (disposing) { }

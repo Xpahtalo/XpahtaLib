@@ -19,7 +19,19 @@ public class TabBar: IDisposable
         }
     }
 
-
+    public void OnOpen()
+    {
+        foreach (var tab in Tabs){
+            tab.OnOpen();
+        }
+    }
+    
+    public void OnClose()
+    {
+        foreach (var tab in Tabs){
+            tab.OnClose();
+        }
+    }
 
     protected virtual void Dispose(bool disposing)
     {
