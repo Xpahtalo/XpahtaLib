@@ -1,11 +1,10 @@
-﻿using Dalamud.Interface.Utility.Raii;
-using ImGuiNET;
+﻿using ImGuiNET;
 
 namespace XpahtaLib.UserInterface;
 
 public class Button: ImGuiWidget
 {
-    private string _label;
+    private readonly string _label;
 
     public delegate void         ButtonPressed();
     private event ButtonPressed? Pressed;

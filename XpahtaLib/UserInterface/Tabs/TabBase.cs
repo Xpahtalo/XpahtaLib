@@ -1,9 +1,8 @@
 ﻿using Dalamud.Interface.Utility.Raii;
-using ImGuiNET;
 
 namespace XpahtaLib.UserInterface.Tabs;
 
-public abstract class TabBase : IDisposable
+public abstract class TabBase: IDisposable
 {
     public abstract string Name { get; }
 
@@ -18,12 +17,12 @@ public abstract class TabBase : IDisposable
     protected abstract void DrawTab();
 
     public virtual void OnOpen() { }
-    
+
     public virtual void OnClose() { }
 
     protected virtual void Dispose(bool disposing)
     {
-        if (disposing) { }
+        if (disposing){ }
     }
 
     public void Dispose()

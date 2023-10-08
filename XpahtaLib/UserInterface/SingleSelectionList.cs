@@ -6,17 +6,20 @@ namespace XpahtaLib.UserInterface;
 
 public class SingleSelectionList<TItemType>: ImGuiWidget
 {
-    private Func<TItemType, string>           ItemToLabel           { get; }
-    private Func<TItemType?, TItemType, bool> CompareItemToSelected { get; }
+    private readonly string                            _label;
+    private          Func<TItemType, string>           ItemToLabel           { get; }
+    private          Func<TItemType?, TItemType, bool> CompareItemToSelected { get; }
 
     public delegate void                  OnListSelectionChanged(TItemType? selectedItem);
     private event OnListSelectionChanged? SelectionChanged;
 
     public SingleSelectionList(
+        string                            label,
         Func<TItemType, string>           itemToLabel,
         Func<TItemType?, TItemType, bool> compareItemToSelected,
         OnListSelectionChanged            onListSelectionChanged)
     {
+        _label                =  label;
         ItemToLabel           =  itemToLabel;
         CompareItemToSelected =  compareItemToSelected;
         SelectionChanged      += onListSelectionChanged;
@@ -35,7 +38,7 @@ public class SingleSelectionList<TItemType>: ImGuiWidget
     public void Draw<T>(T? selectedItem, IEnumerable<T> items, Vector2 size)
         where T: TItemType
     {
-        using var list = ImRaii.ListBox($"{Id}", size);
+        using var list = ImRaii.ListBox($"{_label}##{Id}", size);
         if (!list)
             return;
         var i = 0;

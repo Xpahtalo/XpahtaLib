@@ -25,7 +25,7 @@ public class TabBar: IDisposable
             tab.OnOpen();
         }
     }
-    
+
     public void OnClose()
     {
         foreach (var tab in Tabs){
