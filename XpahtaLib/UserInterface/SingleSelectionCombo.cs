@@ -8,6 +8,7 @@ public class SingleSelectionCombo<TItemType>: ImGuiWidget
     private readonly string                            _label;
     private          Func<TItemType, string>           ItemToLabel           { get; }
     private          Func<TItemType?, TItemType, bool> CompareItemToSelected { get; }
+    private readonly HelpMarker?                       _helpMarker;
 
     public delegate void                   OnComboSelectionChanged(TItemType? selectedItem);
     private event OnComboSelectionChanged? SelectionChanged;
@@ -16,12 +17,14 @@ public class SingleSelectionCombo<TItemType>: ImGuiWidget
         string                            label,
         Func<TItemType, string>           itemToLabel,
         Func<TItemType?, TItemType, bool> compareItemToSelected,
-        OnComboSelectionChanged           onComboSelectionChanged)
+        OnComboSelectionChanged           onComboSelectionChanged,
+        string?                           helpText = null)
     {
         _label                =  label;
         ItemToLabel           =  itemToLabel;
         CompareItemToSelected =  compareItemToSelected;
         SelectionChanged      += onComboSelectionChanged;
+        _helpMarker           =  helpText is null ? null : new HelpMarker(helpText, Id);
     }
 
     public void Draw<T>(T? selectedItem, IEnumerable<T> items)
@@ -38,5 +41,10 @@ public class SingleSelectionCombo<TItemType>: ImGuiWidget
                 SelectionChanged?.Invoke(item);
             i++;
         }
+
+        if (_helpMarker is null)
+            return;
+        ImGui.SameLine();
+        _helpMarker.Draw();
     }
 }
