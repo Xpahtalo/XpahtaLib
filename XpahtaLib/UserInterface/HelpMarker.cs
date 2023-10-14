@@ -6,8 +6,7 @@ public class HelpMarker: ImGuiWidget
 {
     private readonly string _text;
 
-    public HelpMarker(string text, Guid id)
-        : base(id)
+    public HelpMarker(string text)
     {
         _text = text;
     }

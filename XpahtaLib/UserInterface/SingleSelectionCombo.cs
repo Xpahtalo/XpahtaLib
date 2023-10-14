@@ -24,7 +24,7 @@ public class SingleSelectionCombo<TItemType>: ImGuiWidget
         ItemToLabel           =  itemToLabel;
         CompareItemToSelected =  compareItemToSelected;
         SelectionChanged      += onComboSelectionChanged;
-        _helpMarker           =  helpText is null ? null : new HelpMarker(helpText, Id);
+        _helpMarker           =  helpText is null ? null : new HelpMarker(helpText);
     }
 
     public void Draw<T>(T? selectedItem, IEnumerable<T> items)

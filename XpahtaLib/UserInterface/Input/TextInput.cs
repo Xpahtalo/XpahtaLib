@@ -18,7 +18,7 @@ public class TextInput: ImGuiWidget
         _defaultLabel  = defaultLabel;
         _bufferSize    = bufferSize;
         _onTextChanged = onTextChanged;
-        _helpMarker    = helpText is null ? null : new HelpMarker(helpText, Id);
+        _helpMarker    = helpText is null ? null : new HelpMarker(helpText);
     }
 
     public void Draw(string text) => Draw(text, _defaultLabel);
