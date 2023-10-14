@@ -35,16 +35,15 @@ public class SingleSelectionCombo<TItemType>: ImGuiWidget
                               : ImRaii.Combo($"{_label}##{Id}", "",                             ImGuiComboFlags.None);
         if (!combo)
             return;
+        if (_helpMarker is not null){
+            ImGui.SameLine();
+            _helpMarker.Draw();
+        }
         var i = 0;
         foreach (var item in items){
             if (ImGui.Selectable($"{ItemToLabel(item)}##{i}", CompareItemToSelected(selectedItem, item)))
                 SelectionChanged?.Invoke(item);
             i++;
         }
-
-        if (_helpMarker is null)
-            return;
-        ImGui.SameLine();
-        _helpMarker.Draw();
     }
 }

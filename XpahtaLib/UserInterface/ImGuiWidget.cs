@@ -1,6 +1,4 @@
-﻿using ImGuiNET;
-
-namespace XpahtaLib.UserInterface;
+﻿namespace XpahtaLib.UserInterface;
 
 public class ImGuiWidget
 {
