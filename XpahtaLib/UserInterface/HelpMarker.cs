@@ -6,11 +6,8 @@ public class HelpMarker: ImGuiWidget
 {
     private readonly string _text;
 
-    public HelpMarker(string text)
-    {
-        _text = text;
-    }
-    
+    public HelpMarker(string text) { _text = text; }
+
     public void Draw()
     {
         ImGui.SameLine();
