@@ -31,8 +31,6 @@ public class SingleSelectionList<TItemType>: ImGuiWidget
     /// <param name="selectedItem">The currently selected item.</param>
     /// <param name="items">An IEnumerable of the items in the list.</param>
     /// <param name="size">The display size of the list box.</param>
-    /// <param name="itemToLabel">A function to get a label from the item.</param>
-    /// <param name="compareItemToSelected">A function to compare items.</param>
     /// <typeparam name="T">The type of the item in the list.</typeparam>
     /// <returns>Item1: False if the list box was not drawn, otherwise true. Item2: The selected item.</returns>
     public void Draw<T>(T? selectedItem, IEnumerable<T> items, Vector2 size)
