@@ -5,10 +5,12 @@ using XpahtaLib.DalamudUtilities.Interfaces;
 namespace XpahtaLib.UserInterface;
 
 [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
-public sealed class WindowManager : IDisposable
+public class WindowManager : IDisposable
 {
-    private WindowSystem  WindowSystem { get; }
-    private IPluginLogger Log          { get; }
+    private readonly bool                       _disposed = false;
+    protected        Dictionary<string, Window> Windows      { get; } = new();
+    protected        WindowSystem               WindowSystem { get; }
+    protected        IPluginLogger              Log          { get; }
 
     public WindowManager(string pluginName, IPluginLogger pluginLogger)
     {
@@ -16,25 +18,7 @@ public sealed class WindowManager : IDisposable
         Log          = pluginLogger;
     }
 
-    private bool GetWindowByName(string name, [NotNullWhen(true)] out Window? window)
-    {
-        var matching = from storedWindow in WindowSystem.Windows
-                       where storedWindow.WindowName == name
-                       select storedWindow;
-        var enumerable = matching.ToList();
-        switch (enumerable.Count) {
-            case > 1:
-                Log.Error("Found multiple windows with name {0}", name);
-                window = null;
-                return false;
-            case 0:
-                window = null;
-                return false;
-            default:
-                window = enumerable.First();
-                return true;
-        }
-    }
+    public bool GetWindowByName(string name, [NotNullWhen(true)] out Window? window) => Windows.TryGetValue(name, out window);
 
     public bool AddWindow(Window window)
     {
@@ -44,6 +28,7 @@ public sealed class WindowManager : IDisposable
         }
 
         Log.Info("Adding window {0}", window.WindowName);
+        Windows.Add(window.WindowName, window);
         WindowSystem.AddWindow(window);
         return true;
     }
@@ -51,18 +36,26 @@ public sealed class WindowManager : IDisposable
     public bool RemoveWindow(string name)
     {
         if (!GetWindowByName(name, out var window)) {
-            Log.Error("Unable to find window with name {0} to remove.", name);
-            return false;
+            throw new ArgumentOutOfRangeException(nameof(name), name, "Unable to find window with given name to remove.") {
+                Source = "XpahtaLib.WindowManager.RemoveWindow",
+                Data = {
+                    { "WindowNames", Windows.Keys },
+                },
+            };
         }
 
-        Log.Info("Removing window {0}", name);
+        return RemoveWindow(window);
+    }
+
+    public bool RemoveWindow(Window window)
+    {
+        Log.Info("Removing window {0}", window.WindowName);
         WindowSystem.RemoveWindow(window);
+        Windows.Remove(window.WindowName);
         var disposable = window as IDisposable;
         disposable?.Dispose();
         return true;
     }
-
-    public bool RemoveWindow(Window window) => RemoveWindow(window.WindowName);
 
     public bool OpenWindow(string name)
     {
@@ -103,13 +96,21 @@ public sealed class WindowManager : IDisposable
 
     public void Draw() => WindowSystem.Draw();
 
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed) {
+            if (disposing) {
+                WindowSystem.RemoveAllWindows();
+
+                foreach (var disposable in Windows.Values.OfType<IDisposable>()) {
+                    disposable.Dispose();
+                }
+            }
+        }
+    }
     public void Dispose()
     {
-        var toDispose =
-            from window in WindowSystem.Windows
-            where window is IDisposable
-            select window as IDisposable;
-        WindowSystem.RemoveAllWindows();
-        toDispose.ToList().ForEach(disposable => disposable.Dispose());
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }
