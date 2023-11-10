@@ -2,18 +2,21 @@
 
 namespace XpahtaLib.UserInterface.Tabs;
 
-public class TabBar: IDisposable
+public class TabBar : IDisposable
 {
     public required string Name { get; set; }
+
     // ReSharper disable once CollectionNeverUpdated.Global
     public required List<TabBase> Tabs { get; set; }
 
     public void Draw()
     {
         using var tabBar = ImRaii.TabBar(Name);
-        if (!tabBar)
+        if (!tabBar) {
             return;
-        for (var i = 0; i < Tabs.Count; i++){
+        }
+
+        for (var i = 0; i < Tabs.Count; i++) {
             using var id = ImRaii.PushId(i);
             Tabs[i].Draw();
         }
@@ -21,23 +24,25 @@ public class TabBar: IDisposable
 
     public void OnOpen()
     {
-        foreach (var tab in Tabs){
+        foreach (var tab in Tabs) {
             tab.OnOpen();
         }
     }
 
     public void OnClose()
     {
-        foreach (var tab in Tabs){
+        foreach (var tab in Tabs) {
             tab.OnClose();
         }
     }
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposing)
+        if (!disposing) {
             return;
-        foreach (var tab in Tabs){
+        }
+
+        foreach (var tab in Tabs) {
             tab.Dispose();
         }
     }

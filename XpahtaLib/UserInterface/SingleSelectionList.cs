@@ -4,23 +4,23 @@ using ImGuiNET;
 
 namespace XpahtaLib.UserInterface;
 
-public class SingleSelectionList<TItemType>: ImGuiWidget
+public class SingleSelectionList<TItemType> : ImGuiWidget
 {
-    private readonly string                            _label;
-    private          Func<TItemType, string>           ItemToLabel           { get; }
-    private          Func<TItemType?, TItemType, bool> CompareItemToSelected { get; }
+    private string                            DefaultLabel          { get; }
+    private Func<TItemType, string>           ItemToString          { get; }
+    private Func<TItemType?, TItemType, bool> CompareItemToSelected { get; }
 
     public delegate void                  OnListSelectionChanged(TItemType? selectedItem);
     private event OnListSelectionChanged? SelectionChanged;
 
     public SingleSelectionList(
-        string                            label,
-        Func<TItemType, string>           itemToLabel,
+        string                            defaultLabel,
+        Func<TItemType, string>           itemToString,
         Func<TItemType?, TItemType, bool> compareItemToSelected,
         OnListSelectionChanged            onListSelectionChanged)
     {
-        _label                =  label;
-        ItemToLabel           =  itemToLabel;
+        DefaultLabel          =  defaultLabel;
+        ItemToString          =  itemToString;
         CompareItemToSelected =  compareItemToSelected;
         SelectionChanged      += onListSelectionChanged;
     }
@@ -34,15 +34,19 @@ public class SingleSelectionList<TItemType>: ImGuiWidget
     /// <typeparam name="T">The type of the item in the list.</typeparam>
     /// <returns>Item1: False if the list box was not drawn, otherwise true. Item2: The selected item.</returns>
     public void Draw<T>(T? selectedItem, IEnumerable<T> items, Vector2 size)
-        where T: TItemType
+    where T : TItemType
     {
-        using var list = ImRaii.ListBox($"{_label}##{Id}", size);
-        if (!list)
+        using var list = ImRaii.ListBox($"{DefaultLabel}##{Id}", size);
+        if (!list) {
             return;
+        }
+
         var i = 0;
-        foreach (var item in items){
-            if (ImGui.Selectable($"{ItemToLabel(item)}##{i}", CompareItemToSelected(selectedItem, item)))
+        foreach (var item in items) {
+            if (ImGui.Selectable($"{ItemToString(item)}##{i}", CompareItemToSelected(selectedItem, item))) {
                 SelectionChanged?.Invoke(item);
+            }
+
             i++;
         }
     }

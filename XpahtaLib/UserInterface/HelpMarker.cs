@@ -2,17 +2,18 @@
 
 namespace XpahtaLib.UserInterface;
 
-public class HelpMarker: ImGuiWidget
+public class HelpMarker : ImGuiWidget
 {
-    private readonly string _text;
+    private string Text { get; }
 
-    public HelpMarker(string text) { _text = text; }
+    public HelpMarker(string text) { Text = text; }
 
     public void Draw()
     {
         ImGui.SameLine();
         ImGui.TextDisabled("(?)");
-        if (ImGui.IsItemHovered())
-            ImGui.SetTooltip(_text);
+        if (ImGui.IsItemHovered()) {
+            ImGui.SetTooltip(Text);
+        }
     }
 }

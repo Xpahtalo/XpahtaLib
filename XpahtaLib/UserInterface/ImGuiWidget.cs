@@ -2,5 +2,5 @@
 
 public class ImGuiWidget
 {
-    public Guid Id { get; init; } = Guid.NewGuid();
+    public Guid Id { get; } = Guid.NewGuid();
 }

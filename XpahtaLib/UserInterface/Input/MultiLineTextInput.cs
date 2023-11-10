@@ -3,14 +3,14 @@ using ImGuiNET;
 
 namespace XpahtaLib.UserInterface.Input;
 
-public class MultiLineTextInput: ImGuiWidget
+public class MultiLineTextInput : ImGuiWidget
 {
-    private readonly string              _defaultLabel;
-    private readonly uint                _maxLength;
-    private readonly Action<string>      _onTextChanged;
-    private readonly HelpMarker?         _helpMarker;
-    private readonly ImGuiInputTextFlags _flags;
-    private readonly bool                _cleanClipboard;
+    private string              DefaultLabel   { get; }
+    private uint                MaxLength      { get; }
+    private Action<string>      OnTextChanged  { get; }
+    private HelpMarker?         Marker         { get; }
+    private ImGuiInputTextFlags Flags          { get; }
+    private bool                CleanClipboard { get; }
 
     public MultiLineTextInput(
         string              defaultLabel,
@@ -20,15 +20,15 @@ public class MultiLineTextInput: ImGuiWidget
         ImGuiInputTextFlags flags          = ImGuiInputTextFlags.None,
         bool                cleanClipboard = false)
     {
-        _defaultLabel   = defaultLabel;
-        _onTextChanged  = onTextChanged;
-        _maxLength      = maxLength;
-        _helpMarker     = helpText is null ? null : new HelpMarker(helpText);
-        _flags          = flags;
-        _cleanClipboard = cleanClipboard;
+        DefaultLabel   = defaultLabel;
+        OnTextChanged  = onTextChanged;
+        MaxLength      = maxLength;
+        Marker         = helpText is null ? null : new HelpMarker(helpText);
+        Flags          = flags;
+        CleanClipboard = cleanClipboard;
     }
 
-    public void Draw(string text) => Draw(text, _defaultLabel);
+    public void Draw(string text) => Draw(text, DefaultLabel);
 
     public void Draw(string text, string label)
     {
@@ -39,33 +39,40 @@ public class MultiLineTextInput: ImGuiWidget
         Draw(text, label, size);
     }
 
-    public void Draw(string text, Vector2 size) => Draw(text, _defaultLabel, size);
+    public void Draw(string text, Vector2 size) => Draw(text, DefaultLabel, size);
 
     public void Draw(string text, string label, Vector2 size)
     {
-        if (ImGui.InputTextMultiline($"{label}###{Id}", ref text, _maxLength, size, _flags))
-            _onTextChanged.Invoke(text);
-        if (_cleanClipboard
-         && ImGui.IsItemActive()
-         && (ImGui.IsKeyPressed(ImGuiKey.LeftCtrl) || ImGui.IsKeyPressed(ImGuiKey.RightCtrl))){
-            var clipboardText = ImGui.GetClipboardText();
-            if ((clipboardText.Contains('\r') || clipboardText.Contains('\n')) && !clipboardText.Contains("\r\n"))
-                ImGui.SetClipboardText(clipboardText.ReplaceLineEndings("\r\n"));
+        if (ImGui.InputTextMultiline($"{label}###{Id}", ref text, MaxLength, size, Flags)) {
+            OnTextChanged.Invoke(text);
         }
 
-        if (_helpMarker is null)
+        if (CleanClipboard
+         && ImGui.IsItemActive()
+         && (ImGui.IsKeyPressed(ImGuiKey.LeftCtrl) || ImGui.IsKeyPressed(ImGuiKey.RightCtrl))) {
+            var clipboardText = ImGui.GetClipboardText();
+            if ((clipboardText.Contains('\r') || clipboardText.Contains('\n')) && !clipboardText.Contains("\r\n")) {
+                ImGui.SetClipboardText(clipboardText.ReplaceLineEndings("\r\n"));
+            }
+        }
+
+        if (Marker is null) {
             return;
+        }
+
         ImGui.SameLine();
-        _helpMarker.Draw();
+        Marker.Draw();
     }
 
     private static int GetLinesInString(ReadOnlySpan<char> text)
     {
         var lines = 1;
-        foreach (var c in text){
-            if (c == '\n')
+        foreach (var c in text) {
+            if (c == '\n') {
                 lines++;
+            }
         }
+
         return lines;
     }
 }

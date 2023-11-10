@@ -2,24 +2,25 @@
 
 namespace XpahtaLib.UserInterface;
 
-public class Button: ImGuiWidget
+public class Button : ImGuiWidget
 {
-    private readonly string _defaultLabel;
+    private string DefaultLabel { get; }
 
     public delegate void         ButtonPressed();
     private event ButtonPressed? Pressed;
 
     public Button(string defaultLabel, ButtonPressed buttonPressed)
     {
-        _defaultLabel =  defaultLabel;
-        Pressed       += buttonPressed;
+        DefaultLabel =  defaultLabel;
+        Pressed      += buttonPressed;
     }
 
-    public void Draw() => Draw(_defaultLabel);
+    public void Draw() => Draw(DefaultLabel);
 
     public void Draw(string label)
     {
-        if (ImGui.Button($"{label}##{Id}"))
+        if (ImGui.Button($"{label}##{Id}")) {
             Pressed?.Invoke();
+        }
     }
 }

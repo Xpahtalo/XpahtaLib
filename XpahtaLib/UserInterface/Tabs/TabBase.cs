@@ -2,15 +2,17 @@
 
 namespace XpahtaLib.UserInterface.Tabs;
 
-public abstract class TabBase: IDisposable
+public abstract class TabBase : IDisposable
 {
-    public abstract string Name { get; }
+    protected abstract string TabName { get; }
 
     public virtual void Draw()
     {
-        using var tab = ImRaii.TabItem(Name);
-        if (!tab)
+        using var tab = ImRaii.TabItem(TabName);
+        if (!tab) {
             return;
+        }
+
         DrawTab();
     }
 
@@ -22,7 +24,7 @@ public abstract class TabBase: IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (disposing){ }
+        if (disposing) { }
     }
 
     public void Dispose()

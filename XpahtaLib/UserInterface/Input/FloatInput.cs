@@ -2,12 +2,12 @@
 
 namespace XpahtaLib.UserInterface.Input;
 
-public class FloatInput: ImGuiWidget
+public class FloatInput : ImGuiWidget
 {
-    private readonly string        _defaultLabel;
-    private readonly float         _min;
-    private readonly float         _max;
-    private readonly Action<float> _onValueChanged;
+    private string        DefaultLabel   { get; }
+    private float         Min            { get; }
+    private float         Max            { get; }
+    private Action<float> OnValueChanged { get; }
 
     public FloatInput(
         string        defaultLabel,
@@ -15,17 +15,18 @@ public class FloatInput: ImGuiWidget
         float         max,
         Action<float> onValueChanged)
     {
-        _defaultLabel   = defaultLabel;
-        _min            = min;
-        _max            = max;
-        _onValueChanged = onValueChanged;
+        DefaultLabel   = defaultLabel;
+        Min            = min;
+        Max            = max;
+        OnValueChanged = onValueChanged;
     }
 
-    public void Draw(float value) => Draw(value, _defaultLabel);
+    public void Draw(float value) => Draw(value, DefaultLabel);
 
     public void Draw(float value, string label)
     {
-        if (ImGui.SliderFloat($"{label}##{Id}", ref value, _min, _max))
-            _onValueChanged(value);
+        if (ImGui.SliderFloat($"{label}##{Id}", ref value, Min, Max)) {
+            OnValueChanged(value);
+        }
     }
 }
