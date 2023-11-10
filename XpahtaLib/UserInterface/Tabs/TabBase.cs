@@ -4,7 +4,7 @@ namespace XpahtaLib.UserInterface.Tabs;
 
 public abstract class TabBase : IDisposable
 {
-    protected abstract string TabName { get; }
+    public abstract string TabName { get; }
 
     public virtual void Draw()
     {
