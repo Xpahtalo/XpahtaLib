@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace XpahtaLib.DalamudUtilities;
+namespace XpahtaLib.DalamudUtilities.UsefulEnums;
 
 public enum Job : uint
 {
