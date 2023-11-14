@@ -49,5 +49,9 @@
 
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta08" ExcludeAssets="runtime"/>
+    </ItemGroup>
+
 
 </Project>

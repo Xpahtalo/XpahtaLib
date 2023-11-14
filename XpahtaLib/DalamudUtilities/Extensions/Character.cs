@@ -8,7 +8,7 @@ public static class CharacterExtensions
     public static Job GetJob(this Character character)
     {
         var jobId = character.ClassJob.Id;
-        if (jobId < JobExtensions.DefinedJobCount) {
+        if (JobExtensions.IsDefined((Job)jobId)) {
             return (Job)jobId;
         }
 

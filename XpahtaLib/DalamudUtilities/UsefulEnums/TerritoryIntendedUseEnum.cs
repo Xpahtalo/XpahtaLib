@@ -87,13 +87,9 @@ public enum TerritoryIntendedUseEnum : byte
     ///     All raids excluding the ones in <see cref="Raid1" />.
     /// </summary>
     /// <remarks>
-    ///     There is no known reason why these are different.
-    ///     <see
-    ///         cref="Lumina.Excel.GeneratedSheets2.TerritoryIntendedUse.Unknown11">
-    ///         TerritoryIntendedUse.Unknown11
-    ///     </see>
-    ///     is the
-    ///     only difference, so discovering it's purpose may explain the reason.
+    ///     There is no known reason why these are different. <see
+    ///     cref="Lumina.Excel.GeneratedSheets2.TerritoryIntendedUse.Unknown11"> TerritoryIntendedUse.Unknown11 </see>
+    ///     is the only difference, so discovering it's purpose may explain the reason.
     /// </remarks>
     Raid2 = 17,
 
@@ -103,8 +99,8 @@ public enum TerritoryIntendedUseEnum : byte
     Frontlines = 18,
 
     /// <summary>
-    ///     This used to be the territory with name "w1ed" (the zone under The Gold Saucer), but that has been changed to
-    ///     use <see cref="TerritoryIntendedUseEnum.TheGoldSaucer" />.
+    ///     This used to be the territory with name "w1ed" (the zone under The Gold Saucer), but that has been changed
+    ///     to use <see cref="TerritoryIntendedUseEnum.TheGoldSaucer" />.
     /// </summary>
     /// <remarks>
     ///     No longer referenced in the sheets.
@@ -277,8 +273,8 @@ public enum TerritoryIntendedUseEnum : byte
     DelebrumReginaeSavage = 53,
 
     /// <summary>
-    ///     Seems to only be used in the The Propylaion in Elpis, and the in an Ultima Thule section. The Propylaion is the
-    ///     initial zone you enter on your first visit to Elpis during the MSQ. It is inaccessible after that.
+    ///     Seems to only be used in the The Propylaion in Elpis, and the in an Ultima Thule section. The Propylaion is
+    ///     the initial zone you enter on your first visit to Elpis during the MSQ. It is inaccessible after that.
     /// </summary>
     EndwalkerMsqSoloOverworld = 54,
 

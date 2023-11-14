@@ -1,10 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using NetEscapades.EnumGenerators;
 
 namespace XpahtaLib.DalamudUtilities.UsefulEnums;
 
+[EnumExtensions]
 public enum Job : uint
 {
-    Unknown       = 0,
+    [Display(Name = "Adventurer")]
+    Unknown = 0,
     Gladiator     = 1,
     Pugilist      = 2,
     Marauder      = 3,
@@ -28,33 +32,39 @@ public enum Job : uint
     Warrior       = 21,
     Dragoon       = 22,
     Bard          = 23,
-    WhiteMage     = 24,
-    BlackMage     = 25,
-    Arcanist      = 26,
-    Summoner      = 27,
-    Scholar       = 28,
-    Rogue         = 29,
-    Ninja         = 30,
-    Machinist     = 31,
-    DarkKnight    = 32,
-    Astrologian   = 33,
-    Samurai       = 34,
-    RedMage       = 35,
-    BlueMage      = 36,
-    Gunbreaker    = 37,
-    Dancer        = 38,
-    Reaper        = 39,
-    Sage          = 40,
-    NewJob1       = 41,
-    NewJob2       = 42,
+
+    [Display(Name = "White Mage")]
+    WhiteMage = 24,
+
+    [Display(Name = "Black Mage")]
+    BlackMage = 25,
+    Arcanist  = 26,
+    Summoner  = 27,
+    Scholar   = 28,
+    Rogue     = 29,
+    Ninja     = 30,
+    Machinist = 31,
+
+    [Display(Name = "Dark Knight")]
+    DarkKnight = 32,
+    Astrologian = 33,
+    Samurai     = 34,
+
+    [Display(Name = "Red Mage")]
+    RedMage = 35,
+
+    [Display(Name = "Blue Mage")]
+    BlueMage = 36,
+    Gunbreaker = 37,
+    Dancer     = 38,
+    Reaper     = 39,
+    Sage       = 40,
 }
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public static class JobExtensions
+public static partial class JobExtensions
 {
-    internal static uint DefinedJobCount => 43;
-
     public static bool IsDiscipleOfTheLand(this Job job) =>
         job switch {
             Job.Miner    => true,
@@ -164,8 +174,6 @@ public static class JobExtensions
             Job.Dancer      => true,
             Job.Reaper      => true,
             Job.Sage        => true,
-            Job.NewJob1     => true,
-            Job.NewJob2     => true,
             _               => false,
         };
 
