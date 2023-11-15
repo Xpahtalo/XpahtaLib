@@ -45,12 +45,11 @@
             <HintPath>$(DalamudLibPath)Serilog.dll</HintPath>
             <Private>false</Private>
         </Reference>
-
-
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta08" ExcludeAssets="runtime"/>
+        <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta08"
+                          PrivateAssets="all" ExcludeAssets="runtime"/>
     </ItemGroup>
 
 

@@ -13,6 +13,8 @@ public static class TerritoryTypeExtensions
     public static bool IsRaidOrTrial(this Old.TerritoryType territoryType) => ((TerritoryIntendedUseEnum)territoryType.TerritoryIntendedUse).IsRaidOrTrial();
 
     public static AllianceType GetAllianceType(this Old.TerritoryType territoryType) => ((TerritoryIntendedUseEnum)territoryType.TerritoryIntendedUse).GetAllianceType();
+
+    public static TerritoryIntendedUseEnum GetIntendedUseEnum(this Old.TerritoryType territoryType) => (TerritoryIntendedUseEnum)territoryType.TerritoryIntendedUse;
 }
 
 public static class TerritoryType2Extensions
@@ -24,4 +26,6 @@ public static class TerritoryType2Extensions
     public static bool IsRaidOrTrial(this New.TerritoryType territoryType) => ((TerritoryIntendedUseEnum)territoryType.TerritoryIntendedUse).IsRaidOrTrial();
 
     public static AllianceType GetAllianceType(this New.TerritoryType territoryType) => ((TerritoryIntendedUseEnum)territoryType.TerritoryIntendedUse).GetAllianceType();
+
+    public static TerritoryIntendedUseEnum GetIntendedUseEnum(this New.TerritoryType territoryType) => (TerritoryIntendedUseEnum)territoryType.TerritoryIntendedUse;
 }
