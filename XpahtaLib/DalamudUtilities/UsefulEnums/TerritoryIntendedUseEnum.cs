@@ -33,7 +33,7 @@ public enum TerritoryIntendedUseEnum : byte
     /// <summary>
     ///     GM Jail
     /// </summary>
-    MordianGaol = 5,
+    MordionGaol = 5,
 
     /// <summary>
     ///     The zone that a brand new player starts in before it is in a shared space with others.
@@ -59,6 +59,19 @@ public enum TerritoryIntendedUseEnum : byte
     ///     Zones that are used for Duties that fall under the Trials Duty Finder tab.
     /// </summary>
     Trial = 10,
+
+    /// <summary>
+    ///     No <see cref="Lumina.Excel.GeneratedSheets2.TerritoryType" /> uses this currently.
+    /// </summary>
+    /// <remarks>
+    ///     No history for this value being used.
+    /// </remarks>
+    CurrentlyUnused1 = 11,
+
+    /// <summary>
+    ///     Zones that a player is placed into after that have completed certain duties.
+    /// </summary>
+    PostDutyRoom = 12,
 
     /// <summary>
     ///     The outdoors area of the housing wards.rr
@@ -128,6 +141,14 @@ public enum TerritoryIntendedUseEnum : byte
     TheGoldSaucer = 23,
 
     /// <summary>
+    ///     The original Steps of Faith trial used this. Steps of Faith was made a solo duty in patch 6.2 and now uses
+    ///     <see cref="SoloDuty" />.
+    /// </summary>
+    /// <remarks>
+    /// </remarks>
+    OriginalStepsOfFaith = 24,
+
+    /// <summary>
     ///     Lord of Verminion matches.
     /// </summary>
     LordOfVerminion = 25,
@@ -136,7 +157,7 @@ public enum TerritoryIntendedUseEnum : byte
     ///     The first version of The Diadem, released in patch 3.1.
     /// </summary>
     /// <remarks>
-    ///     Inaccessible in game.
+    ///     No longer accessible in game.
     /// </remarks>
     ExploratoryMissions = 26,
 
@@ -186,6 +207,15 @@ public enum TerritoryIntendedUseEnum : byte
     TripleTriadBattlehall = 35,
 
     /// <summary>
+    ///     Kugane Ohashi trial up until patch 4.36. The trial was moved to <see cref="Trial" /> in patch 4.4. The trial
+    ///     didn't actually release until  patch 4.56, so this was never actually used.
+    /// </summary>
+    /// <remarks>
+    ///     No longer accessible in game.
+    /// </remarks>
+    PreReleaseKuganeOhashi = 36,
+
+    /// <summary>
     ///     Crystalline Conflict custom matches.
     /// </summary>
     PvpCustomMatch = 37,
@@ -204,9 +234,23 @@ public enum TerritoryIntendedUseEnum : byte
     RivalWings = 39,
 
     /// <summary>
+    ///     A couple rooms that are only accessible during holidays use this. A copy of the Mordion Gaol from The Rising
+    ///     and Frondale's Home for Friendless Foundlings
+    /// </summary>
+    HolidayEventRoom = 40,
+
+    /// <summary>
     ///     All instanced Eureka zones.
     /// </summary>
     Eureka = 41,
+
+    /// <summary>
+    ///     Was used for the Feast map Crystal Tower Training Grounds. The map was removed in patch 6.1.
+    /// </summary>
+    /// <remarks>
+    ///     No longer accessible in game.
+    /// </remarks>
+    CrystalTowerTrainingGrounds = 42,
 
     /// <summary>
     ///     Used for The Rising event in 2018.
@@ -279,6 +323,14 @@ public enum TerritoryIntendedUseEnum : byte
     EndwalkerMsqSoloOverworld = 54,
 
     /// <summary>
+    ///     No <see cref="Lumina.Excel.GeneratedSheets2.TerritoryType" /> uses this currently.
+    /// </summary>
+    /// <remarks>
+    ///     No history for this value being used.
+    /// </remarks>
+    CurrentlyUnused2 = 55,
+
+    /// <summary>
     ///     Special zone for gathering materials for tribal quests.
     /// </summary>
     /// <remarks>
@@ -305,9 +357,9 @@ public enum TerritoryIntendedUseEnum : byte
     Blunderville = 59,
 
     /// <summary>
-    ///     This exists in the sheets, but no <see cref="Lumina.Excel.GeneratedSheets2.TerritoryType" /> uses it.
+    ///     No <see cref="Lumina.Excel.GeneratedSheets2.TerritoryType" /> uses this currently.
     /// </summary>
-    Unused = 60,
+    CurrentlyUnused3 = 60,
 }
 
 public static class TerritoryIntendedUseExtensions
