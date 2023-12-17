@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net7.0-windows7.0": {
+      "NetEscapades.EnumGenerators": {
+        "type": "Direct",
+        "requested": "[1.0.0-beta08, )",
+        "resolved": "1.0.0-beta08",
+        "contentHash": "xMALwEe2raVfGmczJUJzLQuxKL9f3NnsArSGgG1YH2sUqb5GAmqzyKa+oNGfJS+tRdj6NY4+DlcbAmliNoBMdg=="
+      }
+    }
+  }
+}
