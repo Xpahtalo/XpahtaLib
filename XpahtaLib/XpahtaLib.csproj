@@ -50,7 +50,7 @@
 
     <ItemGroup>
         <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta08"
-                          PrivateAssets="all" ExcludeAssets="runtime"/>
+                          PrivateAssets="contentfiles;analyzers;build" ExcludeAssets="runtime"/>
     </ItemGroup>
 
 
